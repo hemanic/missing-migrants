@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title>Missing Migrants Marker Map</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="../static/favicon.ico">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="../static/styles/vendor/bootstrap.min.css">
+<!-- Fonts -->
+<link rel="stylesheet" href="../static/fonts/et-lineicons/css/style.css">
+<link rel="stylesheet" href="../static/fonts/linea-font/css/linea-font.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/solid.min.css">
+<!-- Slider -->
+<link rel="stylesheet" href="../static/styles/vendor/slick.css">
+<!-- Lightbox -->
+<link rel="stylesheet" href="../static/styles/vendor/magnific-popup.css">
+<!-- Animate -->
+<link rel="stylesheet" href="../static/styles/vendor/animate.css">
+<!-- Animated Headings -->
+<link rel="stylesheet" href="../static/styles/vendor/animated-heading.css">
+<!-- App CSS -->
+<link rel="stylesheet" href="../static/styles/main.css">
+<link rel="stylesheet" href="../static/styles/responsive.css">
+<!-- JS -->
+<script src="../static/js/vendor/modernizr-2.8.3.min.js"></script>
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+	crossorigin=""></script>
+<!-- Our CSS -->
+<link rel="stylesheet" type="text/css" href="../static/styles/mapstyle.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body id="page-top">
+	<!-- preloader -->
+  	<div class="preloader">
+   		<img src="../static/images/loader.svg" alt="Loading...">
+   	</div>
+   	<!-- top navbar -->
+    <nav class="navbar navbar-default navbar-static-top mega">
+    	<div class="container">
+        	<div class="navbar-header">
+            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                	<span class="sr-only">Toggle navigation</span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+              	</button>
+              	<!-- logo -->
+              	<a class="navbar-brand" href="index.html"><img class="navbar-logo" src="../static/images/logo.png" alt="Missing Migrants Logo"></a>
+            </div>
+            <!-- navbar links -->
+            <div id="navbar" class="navbar-collapse collapse">
+            	<ul class="nav navbar-nav">
+                	<!-- home -->
+                	<li class="dropdown mega-fw">
+                  		<a href="index.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+                  	</li>	
+              	</ul>
+              	<!-- navbar right -->
+              	<ul class="nav navbar-nav navbar-right">
+                	<!-- analysis -->
+                	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Analysis <span class="caret"></span></a>
+                  		<ul class="dropdown-menu bg-solid">
+                    		<div class="row">
+                      			<div class="col-lg-12">
+                        			<li class="dropdown-header">Plots, Maps &amp; Analysis</li>
+                        			<li role="separator" class="divider"></li>
+                        			<li><a href="incidentmap.html">Incident Map</a></li>
+                        			<li><a href="markermap.html">Marker Map</a></li>
+                        			<li><a href="plots.html">Visualizations</a></li>
+                        			<li><a href="predictions.html">Predictive Analysis</a></li>
+                      			</div>
+                      		</div>
+                  		</ul>
+                	</li>
+                	<!-- data -->
+                	<li class="dropdown">
+                  		<a href="data.html">Data</a>
+                	</li>
+              	</ul>
+            </div>
+    	</div>
+ 	</nav>
+ 	<!-- title -->
+   	<div class="page-title pt-small">
+    	<div class="container">
+        	<div class="row">
+            	<h1 class="col-sm-6">Marker Map</h1>
+      		</div>
+    	</div>
+	</div>
+	<!-- inject our map -->
+  	<div id="map"></div>
+	<!-- footer -->    
+  	<footer class="footer-widgets">
+       	<div class="container">
+            <div class="row section">
+              	<!-- about us -->
+              	<div class="col-md-6 col-sm-6 mb-sm-100">
+                	<div class="widget about-widget">
+                  		<h5 class="header-widget">About Us</h5>
+                  		<p>We are students at an Data Analytics Bootcamp at George Washingon University. This project serves as our last project in the program. The program is 6 months
+                  		and now we are showcasing all material that we have learned throughout the program. We are a diverse group of all women (with one man). So our last project is based
+                  		on a global scale.</p>
+                	</div>
+              	</div>
+              	<!-- about iom -->
+              	<div class="col-md-6 col-sm-6 mb-sm-100">
+                	<div class="widget about-widget">
+                  		<h5 class="header-widget">About IOM</h5>
+                  		<p>The IOM, or the International Organization for Migration is an organization that is focused on researching migration trends, try to ensure the health and safety of
+                  		all migrants worldwide and are even involved with governments from around the world promoting policies that support migrant health and wellbeing. Especially during this
+                  		difficult time where migrants are fleeing warzones from the Middle East or South American seeking a better life in the United States, the IOM is there to support these
+                  		migrants to the best of their ability</p>
+                	</div>
+              	</div>
+      		</div>
+       	</div>
+      	<!-- credits -->
+      	<div class="copyright">
+            <div class="container">
+              	<div class="row">
+                	<div class="col-sm-6">
+                  		<small>Created by Cristy Brust, Hemani Choksi, Stefanie Kenyon, Olan Johnson and Ning Xie</small>
+                	</div>
+                	<div class="col-sm-6">
+                  		<small><a href="#page-top" class="pull-right to-the-top">To the top <i class="fa fa-angle-up"></i></a></small>
+                	</div>
+           		</div>
+       		</div>
+		</div>
+  	</footer>
+	<!-- begin scripts -->
+	<script src="../static/js/vendor/jquery-2.1.4.min.js"></script>
+	<script src="../static/js/vendor/google-fonts.js"></script>
+	<script src="../static/js/vendor/jquery.easing.js"></script>
+	<script src="../static/js/vendor/jquery.waypoints.min.js"></script>
+	<script src="../static/js/vendor/bootstrap.min.js"></script>
+	<script src="../static/js/vendor/bootstrap-hover-dropdown.min.js"></script>
+	<script src="../static/js/vendor/smoothscroll.js"></script>
+	<script src="../static/js/vendor/jquery.localScroll.min.js"></script>
+	<script src="../static/js/vendor/jquery.scrollTo.min.js"></script>
+	<script src="../static/js/vendor/jquery.stellar.min.js"></script>
+	<script src="../static/js/vendor/jquery.parallax.js"></script>
+	<script src="../static/js/vendor/slick.min.js"></script>
+	<script src="../static/js/vendor/jquery.easypiechart.min.js"></script>
+	<script src="../static/js/vendor/countup.min.js"></script>
+	<script src="../static/js/vendor/isotope.min.js"></script>
+	<script src="../static/js/vendor/jquery.magnific-popup.min.js"></script>
+	<script src="../static/js/vendor/wow.min.js"></script>
+	<script src="../static/js/vendor/animated-heading.js"></script>
+	<script src="../static/js/vendor/jquery.ajaxchimp.js"></script>
+	<!-- app js -->
+	<script src="../static/js/main.js"></script>
+	<!-- map js -->
+  	<script type="text/javascript" src="../static/js/leaflet-color-markers.js"></script>
+  	<script src="../static/data/datamap.js"></script>
+  	<script type="text/javascript" src="../static/js/logic+.js"></script>
+</body>
+</html>

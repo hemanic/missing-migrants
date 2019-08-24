@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<title>Missing Migrants Predictive Analysis</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="../static/favicon.ico">
+<!-- Bootstrap -->
+<link rel="stylesheet" href="../static/styles/vendor/bootstrap.min.css">
+<!-- Fonts -->
+<link rel="stylesheet" href="../static/fonts/et-lineicons/css/style.css">
+<link rel="stylesheet" href="../static/fonts/linea-font/css/linea-font.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="../static/fonts/fontawesome/css/solid.min.css">
+<!-- Slider -->
+<link rel="stylesheet" href="../static/styles/vendor/slick.css">
+<!-- Lightbox -->
+<link rel="stylesheet" href="../static/styles/vendor/magnific-popup.css">
+<!-- Animate -->
+<link rel="stylesheet" href="../static/styles/vendor/animate.css">
+<!-- Animated Headings -->
+<link rel="stylesheet" href="../static/styles/vendor/animated-heading.css">
+<!-- App CSS -->
+<link rel="stylesheet" href="../static/styles/main.css">
+<link rel="stylesheet" href="../static/styles/responsive.css">
+<!-- JS -->
+<script src="../static/js/vendor/modernizr-2.8.3.min.js"></script>
+<!-- App -->
+<link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body id="page-top">
+	<!-- preloader -->
+  	<div class="preloader">
+   		<img src="../static/images/loader.svg" alt="Loading...">
+   	</div>
+   	<!-- top navbar -->
+    <nav class="navbar navbar-default navbar-static-top mega">
+    	<div class="container">
+        	<div class="navbar-header">
+            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                	<span class="sr-only">Toggle navigation</span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+                	<span class="icon-bar"></span>
+              	</button>
+              	<!-- logo -->
+              	<a class="navbar-brand" href="index.html"><img class="navbar-logo" src="../static/images/logo.png" alt="Missing Migrants Logo"></a>
+            </div>
+            <!-- navbar links -->
+            <div id="navbar" class="navbar-collapse collapse">
+            	<ul class="nav navbar-nav">
+                	<!-- home -->
+                	<li class="dropdown mega-fw">
+                  		<a href="index.html" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+                  	</li>	
+              	</ul>
+              	<!-- navbar right -->
+              	<ul class="nav navbar-nav navbar-right">
+                	<!-- analysis -->
+                	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Analysis <span class="caret"></span></a>
+                  		<ul class="dropdown-menu bg-solid">
+                    		<div class="row">
+                      			<div class="col-lg-12">
+                        			<li class="dropdown-header">Plots, Maps &amp; Analysis</li>
+                        			<li role="separator" class="divider"></li>
+                        			<li><a href="incidentmap.html">Incident Map</a></li>
+                        			<li><a href="markermap.html">Marker Map</a></li>
+                        			<li><a href="plots.html">Visualizations</a></li>
+                        			<li><a href="predictions.html">Predictive Analysis</a></li>
+                      			</div>
+                      		</div>
+                  		</ul>
+                	</li>
+                	<!-- data -->
+                	<li class="dropdown">
+                  		<a href="data.html">Data</a>
+                	</li>
+              	</ul>
+            </div>
+    	</div>
+ 	</nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-6" id="left-block">
+                <img src="../static/img/Log_ROC.png" width="400" height="350">
+                <p>From the data manipulation above and the data visulization we did before, we decide to work on
+                    the
+                    problem that how other variables contribuate to the “Source Quality”. From EDA, there are some
+                    points have to be noticed, most variables are not quantifiable, so we have to convert them to
+                    dummy
+                    variables to build our model.
+                    For the “Source Quality”, I decide to distinguish them to 0(<=3) and 1(>3) and 0 for unreliable
+                        and
+                        1 for reliable. For the “Region of Incident”, we create 15 dummy variables instead of one
+                        column. For the “URL”, since there are more than 1000 unique links which are hard to deal
+                        with,
+                        we convert it to 0 and 1, 0 means website is unaviliable and 1 means website is aviliable.
+                        Before model building, I want to check whether our data is oversampled. With our training
+                        data
+                        Created, I up-sampled the data with SMOTE algorithm. Then we can have a perfect balanced
+                        data.
+                        After that, I use Recursive Feature Elimination (RFE) to select features. And the result
+                        showed
+                        our variables are good to use.
+                        At last, I build two model: the first is Logistic Regression and second is Neural Network.
+                        Based
+                        on my experience, I guess around so many statistics models and algorithm models, these two
+                        may
+                        perform better. The logistic regression model performed very well, it has an 83% accuracy.
+                        And I
+                        tried different layers, units and tuned different parameters in the NN model, the best
+                        accuray
+                        is 61%, otherwise it would be overfitting or inaccurate. And compared to other models that
+                        Hemani built, the logistic regression model still is the best.
+                        From the result, we can tell that most of our variables contributes a lot to the reliablity
+                        under the 0.05 significance level. P-value of “Central Asia” and “North American” is large,
+                        this
+                        may means reliablity of incidents happened here may hard to be tell. </p>
+        </div>
+            <div class="col-md-4 sidebar">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Regression Analysis</h1>
+                    </div>
+                </div>
+                        <div class="row">
+        
+                            <div class="col-md-3">
+                                <a href="totaldead.html"><img src="../static/img/total_dead.png" width="200px" height="150px"></a>
+                            </div>
+                            <div class="col-md-3"></div>
+        
+                            <div class="col-md-3">
+                                <a href="temperature.html"><img src="../static/img/USMEX_Temp.png" width="200px"
+                                        height="150px"></a>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+        
+                            <div class="col-md-3">
+                                <a href="sourcequalitylinear.html"><img src="../static/img/source_quality_linear.png" width="200px"
+                                        height="150px"></a>
+                            </div>
+                            <div class="col-md-3"></div>
+        
+                            <div class="col-md-3">
+                                <a href="sourcequalitylogistic.html"><img src="../static/img/Log_ROC.png" width="200px"
+                                        height="150px"></a>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+    </div>
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- footer -->    
+<footer class="footer-widgets">
+    <div class="container">
+     <div class="row section">
+           <!-- about us -->
+           <div class="col-md-6 col-sm-6 mb-sm-100">
+             <div class="widget about-widget">
+                   <h5 class="header-widget">About Us</h5>
+                   <p>We are students at an Data Analytics Bootcamp at George Washingon University. This project serves as our last project in the program. The program is 6 months
+                   and now we are showcasing all material that we have learned throughout the program. We are a diverse group of all women (with one man). So our last project is based
+                   on a global scale.</p>
+             </div>
+           </div>
+           <!-- about iom -->
+           <div class="col-md-6 col-sm-6 mb-sm-100">
+             <div class="widget about-widget">
+                   <h5 class="header-widget">About IOM</h5>
+                   <p>The IOM, or the International Organization for Migration is an organization that is focused on researching migration trends, try to ensure the health and safety of
+                   all migrants worldwide and are even involved with governments from around the world promoting policies that support migrant health and wellbeing. Especially during this
+                   difficult time where migrants are fleeing warzones from the Middle East or South American seeking a better life in the United States, the IOM is there to support these
+                   migrants to the best of their ability</p>
+             </div>
+           </div>
+       </div>
+    </div>
+   <!-- credits -->
+   <div class="copyright">
+     <div class="container">
+           <div class="row">
+             <div class="col-sm-6">
+                   <small>Created by Cristy Brust, Hemani Choksi, Stefanie Kenyon, Olan Johnson and Ning Xie</small>
+             </div>
+             <div class="col-sm-6">
+                   <small><a href="#page-top" class="pull-right to-the-top">To the top <i class="fa fa-angle-up"></i></a></small>
+             </div>
+            </div>
+        </div>
+ </div>
+</footer>
+<!-- begin scripts -->
+<script src="../static/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="../static/js/vendor/google-fonts.js"></script>
+<script src="../static/js/vendor/jquery.easing.js"></script>
+<script src="../static/js/vendor/jquery.waypoints.min.js"></script>
+<script src="../static/js/vendor/bootstrap.min.js"></script>
+<script src="../static/js/vendor/bootstrap-hover-dropdown.min.js"></script>
+<script src="../static/js/vendor/smoothscroll.js"></script>
+<script src="../static/js/vendor/jquery.localScroll.min.js"></script>
+<script src="../static/js/vendor/jquery.scrollTo.min.js"></script>
+<script src="../static/js/vendor/jquery.stellar.min.js"></script>
+<script src="../static/js/vendor/jquery.parallax.js"></script>
+<script src="../static/js/vendor/slick.min.js"></script>
+<script src="../static/js/vendor/jquery.easypiechart.min.js"></script>
+<script src="../static/js/vendor/countup.min.js"></script>
+<script src="../static/js/vendor/isotope.min.js"></script>
+<script src="../static/js/vendor/jquery.magnific-popup.min.js"></script>
+<script src="../static/js/vendor/wow.min.js"></script>
+<script src="../static/js/vendor/animated-heading.js"></script>
+<script src="../static/js/vendor/jquery.ajaxchimp.js"></script>
+<!-- app js -->
+<script src="../static/js/main.js"></script>
+<script type="text/javascript" src="../static/js/data.js"></script>
+<script type="text/javascript" src="../static/js/plot.js"></script>
+</body>
+</html>
